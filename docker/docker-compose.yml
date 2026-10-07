@@ -1,0 +1,39 @@
+services:
+
+  postgres:
+    image: postgres:17-alpine
+    container_name: bvs-postgres
+    environment:
+      POSTGRES_DB: rafnovosti
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "12345678"
+    volumes:
+      - ./db-init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d rafnovosti"]
+      interval: 2s
+      timeout: 5s
+      retries: 15
+    networks:
+      - bvs-net
+
+  tomcat:
+    build: .
+    container_name: bvs-tomcat
+    ports:
+      - "8080:8080"
+    environment:
+      DB_HOST: postgres
+      DB_PORT: "5432"
+      DB_NAME: rafnovosti
+      DB_USER: postgres
+      DB_PASSWORD: "12345678"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - bvs-net
+
+networks:
+  bvs-net:
+    driver: bridge

@@ -1,0 +1,36 @@
+**/target/
+*.class
+
+# WAR build artifacts (produced by mvn package and build-wars.sh)
+docker/wars/*.war
+app/target/
+attack/target/
+
+# the Maven wrapper jar must stay (needed for ./mvnw on a fresh clone)
+!**/.mvn/wrapper/maven-wrapper.jar
+
+# dev notes (local)
+STATUS.md
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.project
+.classpath
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker build artifacts
+docker/wars/*.war
+
+# Tomcat / logs
+*.log
+catalina*.out
+apache-tomcat-*/
+apache-tomcat-*.zip

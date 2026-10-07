@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JWT Attack Tool - RAF BVS 2025/26</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="scanlines"></div>
+
+    <header class="top-bar">
+        <div class="brand">
+            <span class="bracket">[</span>
+            <span class="brand-text">JWT-ATTACK-TOOL</span>
+            <span class="bracket">]</span>
+            <span class="version">v1.0</span>
+        </div>
+        <div class="status" id="status">disconnected</div>
+    </header>
+
+    <main class="layout">
+        <aside class="sidebar">
+            <section class="panel">
+                <h2>// LOGIN</h2>
+                <label>target URL</label>
+                <input id="baseUrl" type="text" value="http://localhost:8080/rva/api">
+                <label>email</label>
+                <input id="email" type="text" value="creator@raf.rs">
+                <label>password</label>
+                <input id="password" type="password" value="admin">
+                <button id="loginBtn" class="btn-primary">CAPTURE TOKEN</button>
+                <div class="token-display">
+                    <label>JWT</label>
+                    <textarea id="tokenDisplay" rows="3" readonly placeholder="(empty - log in first)"></textarea>
+                </div>
+                <div class="secret-display">
+                    <label>cracked secret</label>
+                    <input id="secretDisplay" type="text" readonly placeholder="(empty - run Attack 3)">
+                </div>
+            </section>
+
+            <section class="panel">
+                <h2>// ATTACKS</h2>
+                <button class="btn-attack" data-attack="1">[1] Token Decoder</button>
+                <button class="btn-attack" data-attack="2">[2] Token Forgery</button>
+                <button class="btn-attack" data-attack="3">[3] Brute Force Secret</button>
+                <button class="btn-attack" data-attack="4">[4] alg:none Bypass</button>
+                <button class="btn-attack" data-attack="5">[5] Expired Replay</button>
+                <button class="btn-attack" data-attack="6">[6] Privilege Escalation</button>
+                <button class="btn-attack" data-attack="7">[7] Algorithm Confusion</button>
+                <button class="btn-attack" data-attack="8">[8] kid Injection</button>
+                <button class="btn-attack" data-attack="9">[9] No-Revocation Test</button>
+                <button class="btn-attack" data-attack="10">[10] Token Surface Audit</button>
+                <button id="runAllBtn" class="btn-warn">[*] RUN ALL</button>
+            </section>
+        </aside>
+
+        <section class="main-area">
+            <div class="terminal" id="terminal">
+                <div class="terminal-header">
+                    <span class="prompt">root@bvs ~</span>
+                    <span class="separator">$</span>
+                    <span id="cmdLine" class="cmd-line">awaiting input...</span>
+                </div>
+                <div class="terminal-body" id="terminalBody">
+                    <div class="banner">
+<pre>
+   ╔═══════════════════════════════════════════════════════════╗
+   ║   JWT EXPLOITATION TOOL - RAF BVS 2025/26 (Topic #4)        ║
+   ║   Target: RAF Novosti (vulnerable app/)                     ║
+   ║   Tool:   Java + Jersey JAX-RS + HTML/JS frontend           ║
+   ╚═══════════════════════════════════════════════════════════╝
+</pre>
+                        <p class="hint">&rarr; Log in with the creator credentials to capture a token, then run the attacks.</p>
+                        <p class="hint">&rarr; All operations are logged here.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
